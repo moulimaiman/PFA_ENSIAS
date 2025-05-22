@@ -1,0 +1,37 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My HTML Page</title>
+    <script src="token.js"></script>
+</head>
+<body>
+    <p id="demo">Hello, World!</p>
+    <button onclick="Myfunction()">Click me</button>
+    <script>
+        import { getMessaging, getToken } from "firebase/messaging";
+
+const messaging = getMessaging();
+        function Myfunction() {
+getToken(messaging, { vapidKey: 'BCOpdtxI-F4_ct5bQNqDyxoYh7Smy1f_TSBG5-VNSSpan9pyvP5L7scL6nXIbRzVUuBqh3rGybyPJBkpWR-lV4A' })
+  .then((currentToken) => {
+    if (currentToken) {
+      console.log("FCM Token:", currentToken); // This is your registration ID
+
+      document.getElementById("demo").innerHTML = currentToken; // Display the token in the HTML element
+    } else {
+      console.log("No token available");
+    }
+  })
+  .catch((err) => {
+    console.log("Error getting token:", err);
+  });
+
+}
+    </script>
+</body>
+
+</html>
